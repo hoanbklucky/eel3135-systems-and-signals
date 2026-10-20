@@ -91,3 +91,103 @@ $$y_{ss}(t)=2\cos(3t-\pi/6).$$
 
 </details>
 
+## A second derivation using the eigenfunction property
+
+Complex exponentials are eigenfunctions of LTI systems. If
+
+$$
+x(t)=e^{j\omega t},
+$$
+
+then convolution gives
+
+$$
+y(t)=\int_{-\infty}^{\infty}h(\tau)e^{j\omega(t-\tau)}d\tau
+=e^{j\omega t}\int_{-\infty}^{\infty}h(\tau)e^{-j\omega\tau}d\tau.
+$$
+
+The integral is $H(j\omega)$, so
+
+$$
+y(t)=H(j\omega)e^{j\omega t}.
+$$
+
+The waveform keeps the same frequency because the system only multiplies it by the complex number $H(j\omega)$. The magnitude of that number scales amplitude; its angle shifts phase.
+
+## Worked example
+
+Let
+
+$$
+H(s)=\frac{4}{s+4},\qquad x(t)=3\cos(2t).
+$$
+
+Evaluate
+
+$$
+H(j2)=\frac{4}{4+j2}.
+$$
+
+Its magnitude and phase are
+
+$$
+|H(j2)|=\frac{4}{\sqrt{4^2+2^2}}=\frac{2}{\sqrt5},
+$$
+
+$$
+\angle H(j2)=-\tan^{-1}\left(\frac{2}{4}\right).
+$$
+
+Therefore
+
+$$
+y_{ss}(t)=\frac{6}{\sqrt5}
+\cos\left(2t-\tan^{-1}(1/2)\right).
+$$
+
+No differential equation or partial fractions are required when only the sinusoidal steady state is requested.
+
+## Frequency-selective behavior
+
+For $H(s)=a/(s+a)$,
+
+$$
+|H(j\omega)|=\frac{a}{\sqrt{a^2+\omega^2}}.
+$$
+
+Low frequencies pass with magnitude near one, while high frequencies are attenuated. This is a first-order low-pass system. At $\omega=a$,
+
+$$
+|H(ja)|=\frac{1}{\sqrt2},
+$$
+
+which corresponds to approximately $-3$ dB.
+
+Magnitude in decibels is
+
+$$
+20\log_{10}|H(j\omega)|.
+$$
+
+## Common mistakes
+
+- Substituting $s=j\omega$ into $X(s)$ instead of the system transfer function $H(s)$.
+- Multiplying phases instead of adding them.
+- Reporting $\omega$ in hertz. Angular frequency uses rad/s; $\omega=2\pi f$.
+- Using the steady-state formula for an unstable system without considering the growing natural response.
+- Assuming the formula gives the complete response. It omits transient and zero-input terms.
+
+## Additional practice
+
+1. If $|H(j10)|=0.2$ and $\angle H(j10)=45^\circ$, find the steady-state output for $x(t)=4\cos(10t-20^\circ)$.
+2. A stable system has $H(j5)=0$. What steady-state output results from $\cos(5t)$?
+3. For $H(s)=1/(s+1)$, does the phase lag increase or decrease as frequency increases?
+
+<details><summary>Answers</summary>
+
+1. $0.8\cos(10t+25^\circ)$.
+2. Zero.
+3. The lag increases in magnitude: $\angle H(j\omega)=-\tan^{-1}(\omega)$ approaches $-90^\circ$.
+
+</details>
+

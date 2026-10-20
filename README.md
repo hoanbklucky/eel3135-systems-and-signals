@@ -21,6 +21,7 @@ The notes use the unilateral Laplace transform for causal system analysis. Regio
 | 7 | [Frequency response](docs/07_frequency_response.md) | Why does a sinusoid emerge with the same frequency but a different amplitude and phase? |
 | 8 | [Fourier series and Fourier transform](docs/08_fourier_analysis.md) | How do we describe signals by their frequency content? |
 | 9 | [Sampling](docs/09_sampling.md) | When can samples represent a continuous-time signal without ambiguity? |
+| 10 | [Cumulative problem-solving guide](docs/10_problem_solving_guide.md) | How do I decide which representation and method to use? |
 
 ## How to use each module
 
@@ -30,6 +31,39 @@ For each topic:
 2. Work through the example without hiding intermediate steps.
 3. Answer the concept checks without looking at the answers.
 4. Explain the result in words: decay rate, oscillation frequency, source of each term, and any stability condition.
+
+Each module now contains:
+
+- a conceptual explanation of why the mathematics works;
+- one or more fully worked examples;
+- interpretation of the result, not only algebra;
+- common mistakes and diagnostic checks;
+- practice questions with collapsible solutions.
+
+## Recommended study sequence
+
+Use the notes actively. A productive 45–60 minute session is:
+
+1. **Preview (5 minutes):** read the learning goals and the prediction prompt.
+2. **Learn (15 minutes):** follow the explanation and reproduce each derivation on paper.
+3. **Practice (20 minutes):** solve the worked example again without looking, then attempt the concept checks.
+4. **Explain (5 minutes):** state what the answer means in words or sketch the expected waveform.
+5. **Check (5 minutes):** compare units, initial value, final behavior, poles, and signs.
+
+If you can perform the algebra but cannot predict whether a response grows, decays, or oscillates, return to Modules 5 and 6. If you can describe the behavior but cannot calculate it, return to Modules 3 and 4.
+
+## Four representations of the same system
+
+A central goal of the course is learning to move among four complementary views:
+
+| Representation | Best for answering |
+|---|---|
+| Differential equation | What physical law relates input and output? |
+| Impulse response and convolution | How does the system combine delayed input values? |
+| Transfer function and poles | What modes and stability properties does the system have? |
+| Frequency response | How does the system alter each sinusoidal frequency? |
+
+None of these is “the system” by itself. They are different descriptions of the same LTI behavior under the assumptions stated in each module.
 
 ## Core concept map
 
