@@ -34,14 +34,21 @@ Which description of the closed-loop response is correct?
 - Unstable because the closed-loop poles are complex
 - Marginally stable, with poles at $\pm j2$
 
-### Activity 1.3 — Identify the disturbance path
+### Activity 1.3 — Positive feedback and stability
 
-In a unity negative-feedback system, a disturbance $D(s)$ is added directly at the plant output. Which transfer function maps $D(s)$ to $Y(s)$?
+A unity positive-feedback system has
 
-- $G(s)/[1+G(s)]$
-- $1/[1+G(s)]$
-- $G(s)$
-- $1/G(s)$
+$$
+G(s)=\frac{K}{s+2},
+\qquad K>0.
+$$
+
+For which values of $K$ is the closed-loop system stable?
+
+- $0<K<2$
+- $K=2$ only
+- $K>2$
+- Every $K>0$, because the open-loop pole is at $-2$
 
 ---
 
