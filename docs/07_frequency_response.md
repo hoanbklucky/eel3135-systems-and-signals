@@ -373,7 +373,20 @@ $$
 |H(j\omega)|\approx\frac{\omega_p}{\omega}.
 $$
 
-Increasing $\omega$ by a factor of ten reduces the magnitude by a factor of ten. Therefore one real pole changes the high-frequency slope by
+In decibels, this approximation becomes
+
+$$
+20\log_{10}|H(j\omega)|
+\approx-20\log_{10}\left(\frac{\omega}{\omega_p}\right).
+$$
+
+Increasing $\omega$ by one decade means replacing $\omega$ by $10\omega$. The resulting magnitude change is
+
+$$
+-20\log_{10}(10)=-20\text{ dB}.
+$$
+
+Therefore one real pole changes the high-frequency slope by
 
 $$
 -20\text{ dB/decade}.
@@ -395,7 +408,32 @@ $$
 H(s)=1+s/\omega_z,
 $$
 
-the behavior reverses:
+the exact magnitude is
+
+$$
+|H(j\omega)|=\sqrt{1+(\omega/\omega_z)^2}.
+$$
+
+Well above the corner, $\omega\gg\omega_z$, so
+
+$$
+|H(j\omega)|\approx\frac{\omega}{\omega_z}.
+$$
+
+In decibels,
+
+$$
+20\log_{10}|H(j\omega)|
+\approx20\log_{10}\left(\frac{\omega}{\omega_z}\right).
+$$
+
+Increasing frequency by one decade therefore changes the magnitude by
+
+$$
+20\log_{10}(10)=+20\text{ dB}.
+$$
+
+Thus the zero's behavior reverses the pole's behavior:
 
 - the low-frequency magnitude is approximately $0$ dB;
 - above $\omega_z$, the slope increases by $+20$ dB/decade;
@@ -403,6 +441,24 @@ the behavior reverses:
 - the phase equals $+45^\circ$ at $\omega=\omega_z$.
 
 Poles bend the magnitude plot downward. Zeros bend it upward.
+
+The reason the number $20$ appears is not a rule that must be memorized. Bode magnitude uses $20\log_{10}$ of the amplitude ratio, and a decade is a factor of ten:
+
+$$
+20\log_{10}(10)=20\text{ dB}.
+$$
+
+Consequently, after its corner frequency:
+
+$$
+\boxed{
+\begin{aligned}
+\text{one first-order pole}&:\ -20\text{ dB/decade},\\
+\text{one first-order zero}&:\ +20\text{ dB/decade}.
+\end{aligned}}
+$$
+
+These are **asymptotic** contributions. The exact curve changes smoothly near the corner. Contributions add because multiplication of transfer-function factors becomes addition after taking the logarithm. A repeated factor contributes repeatedly: a double pole gives $-40$ dB/decade, while a double zero gives $+40$ dB/decade.
 
 ## Core Bode building blocks
 
