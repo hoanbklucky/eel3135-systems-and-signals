@@ -1,4 +1,4 @@
-# 7. Frequency response and Bode plots
+# 7B. Frequency response and Bode plots
 
 ## Learning goals
 
@@ -159,6 +159,91 @@ y_{ss}(t)=\frac{6}{\sqrt5}
 $$
 
 No differential equation or partial fractions are required when only the sinusoidal steady state is requested.
+
+## Causal sinusoidal input: total response and steady state
+
+When the sinusoid begins at $t=0$, write
+
+$$
+x(t)=3\cos(2t)u(t).
+$$
+
+For
+
+$$
+H(s)=\frac{4}{s+4},
+$$
+
+the zero-state output transform is
+
+$$
+Y(s)=H(s)X(s)
+=\frac{4}{s+4}\frac{3s}{s^2+4}
+=\frac{12s}{(s+4)(s^2+4)}.
+$$
+
+Partial fractions give
+
+$$
+Y(s)=\frac{-2.4}{s+4}
++\frac{2.4s+2.4}{s^2+4}.
+$$
+
+Therefore the complete causal zero-state response is
+
+$$
+y(t)=\left[-2.4e^{-4t}
++2.4\cos(2t)
++1.2\sin(2t)\right]u(t).
+$$
+
+Separate the two parts:
+
+$$
+y_{tr}(t)=-2.4e^{-4t}u(t),
+$$
+
+$$
+y_{ss}(t)=\left[2.4\cos(2t)+1.2\sin(2t)\right]u(t).
+$$
+
+The transient comes from the system pole at $-4$ and decays. The steady-state terms come from the input poles at $\pm j2$ and remain.
+
+Combine the steady-state terms into one sinusoid:
+
+$$
+y_{ss}(t)=\frac{6}{\sqrt5}
+\cos\left(2t-\tan^{-1}(1/2)\right)u(t).
+$$
+
+This is exactly the result obtained from
+
+$$
+H(j2)=\frac{4}{4+j2}
+=\frac{2}{\sqrt5}e^{-j\tan^{-1}(1/2)}.
+$$
+
+The frequency-response method avoids calculating the transient when the problem asks only for the sinusoidal steady state.
+
+## What changes when initial conditions are nonzero?
+
+The equation
+
+$$
+Y_{zs}(s)=H(s)X(s)
+$$
+
+calculates the zero-state response. If the system begins with stored energy, the total response is
+
+$$
+y(t)=y_{zi}(t)+y_{zs}(t).
+$$
+
+For a stable system, the zero-input response decays. The long-term sinusoidal response still follows $H(j\omega)$, but the complete response initially contains additional natural-response terms.
+
+Thus $H(j\omega)$ answers a specific question:
+
+> After the stable system's transient terms have decayed, how does it scale and shift a sinusoid at frequency $\omega$?
 
 ## Frequency-selective behavior
 

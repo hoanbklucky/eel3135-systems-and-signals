@@ -18,13 +18,16 @@ The notes use the unilateral Laplace transform for causal system analysis. Regio
 | 4 | [Laplace transform](docs/04_laplace_transform.md) | How does the transform convert differential equations and convolution into algebra? |
 | 5 | [Poles and time-domain responses](docs/05_poles_and_responses.md) | How do pole patterns determine decay, growth, and oscillation? |
 | 6 | [Zero-input, zero-state, and total response](docs/06_response_decomposition.md) | Which part comes from stored energy, and which part comes from the applied input? |
-| 7 | [Frequency response and Bode plots](docs/07_frequency_response.md) | How do poles and zeros determine which sinusoidal frequencies pass through a system? |
+| 7A | [Feedback and control applications](docs/07a_feedback_controls.md) | How does closing a feedback loop change poles, stability, tracking, and disturbance response? |
+| 7B | [Frequency response and Bode plots](docs/07_frequency_response.md) | How do poles and zeros determine which sinusoidal frequencies pass through a system? |
 | 8 | [Fourier series and Fourier transform](docs/08_fourier_analysis.md) | How do we describe signals by their frequency content? |
 | 9 | [Sampling](docs/09_sampling.md) | When can samples represent a continuous-time signal without ambiguity? |
 | 10 | [Cumulative problem-solving guide](docs/10_problem_solving_guide.md) | How do I decide which representation and method to use? |
 
 ## Lecture slides
 
+- [Section 4.7: Applications to Feedback and Controls](<slides/EEL 3135 Section 4.7 Applications to Feedback and Controls.pptx>) connects the feedback block diagram to the closed-loop transfer function, poles, stability, tracking, disturbance rejection, measurement noise, and gain tradeoffs.
+- [Section 4.8: Frequency Response of an LTIC System](<slides/EEL 3135 Section 4.8 Frequency Response of an LTIC System.pptx>) derives sinusoidal steady state, separates transient and steady-state terms in a causal example, and builds intuition for magnitude and phase before Bode plots.
 - [Frequency Response and Bode Plots](<slides/EEL 3135 Frequency Response and Bode Plots.pptx>) introduces Bode plots through sinusoidal behavior, first-order building blocks, prediction activities, and one complete pole-zero example.
 
 ## How to use each module
