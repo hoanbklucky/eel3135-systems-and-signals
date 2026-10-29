@@ -34,6 +34,10 @@ The notes use the unilateral Laplace transform for causal system analysis. Regio
 - [Section 4.8: Frequency Response of an LTIC System](<slides/EEL 3135 Section 4.8 Frequency Response of an LTIC System.pptx>) derives sinusoidal steady state, separates transient and steady-state terms in a causal example, and builds intuition for magnitude and phase before Bode plots.
 - [Frequency Response and Bode Plots](<slides/EEL 3135 Frequency Response and Bode Plots.pptx>) introduces Bode plots through sinusoidal behavior, first-order building blocks, prediction activities, and one complete pole-zero example.
 
+## Live learning activities
+
+- [Poll Everywhere: feedback, frequency response, and Bode plots](activities/poll_everywhere_feedback_frequency_bode.md) contains three coherent sets of three multiple-choice questions, with answers, explanations, misconception targets, and recommended locations in the slide decks.
+
 ## How to use each module
 
 For each topic:

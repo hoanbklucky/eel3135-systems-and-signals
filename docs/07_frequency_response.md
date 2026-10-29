@@ -317,6 +317,26 @@ $$
 H(s)=\frac{1}{1+s/\omega_p}.
 $$
 
+Here $\omega_p$ is the pole's corner frequency, measured in radians per second. Rewriting the factor as
+
+$$
+H(s)=\frac{\omega_p}{s+\omega_p}
+$$
+
+shows that the pole is located at
+
+$$
+s=-\omega_p.
+$$
+
+Thus the same positive number $\omega_p$ identifies both the Bode corner frequency and the magnitude of the real pole location. For example,
+
+$$
+H(s)=\frac{10}{s+10}=\frac{1}{1+s/10}
+$$
+
+has a pole at $s=-10$ and a corner frequency $\omega_p=10$ rad/s.
+
 Its magnitude is
 
 $$
