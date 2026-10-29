@@ -36,19 +36,18 @@ Which description of the closed-loop response is correct?
 
 ### Activity 1.3 — Positive feedback and stability
 
-A unity positive-feedback system has
+A stable open-loop plant
 
 $$
-G(s)=\frac{K}{s+2},
-\qquad K>0.
+G(s)=\frac{3}{s+2}
 $$
 
-For which values of $K$ is the closed-loop system stable?
+is placed in unity positive feedback. What happens to the closed-loop system?
 
-- $0<K<2$
-- $K=2$ only
-- $K>2$
-- Every $K>0$, because the open-loop pole is at $-2$
+- It is unstable because the closed-loop pole moves to $s=+1$.
+- It is more stable because the closed-loop pole moves to $s=-5$.
+- It is unchanged because the plant pole remains at $s=-2$.
+- It becomes marginally stable with poles at $s=\pm j3$.
 
 ---
 
