@@ -71,10 +71,10 @@ $$
 For $k\ne0$,
 
 $$
-D_k=\frac{T_1}{T_0}\operatorname{sinc}\left(k\frac{T_1}{T_0}\right),
+D_k=\frac{T_1}{T_0}\,\mathrm{sinc}\left(k\frac{T_1}{T_0}\right),
 $$
 
-where $\operatorname{sinc}(x)=\sin(\pi x)/(\pi x)$. Also,
+where $\mathrm{sinc}(x)=\sin(\pi x)/(\pi x)$. Also,
 
 $$
 D_0=\frac{T_1}{T_0},
@@ -89,7 +89,7 @@ Using $X(j\omega)=\int x(t)e^{-j\omega t}dt$:
 | $x(t)$ | $X(j\omega)$ |
 |---|---|
 | $e^{-at}u(t)$, $a>0$ | $1/(a+j\omega)$ |
-| rectangular pulse of width $T$ | $T\operatorname{sinc}(\omega T/2\pi)$ |
+| rectangular pulse of width $T$ | $T\,\mathrm{sinc}(\omega T/2\pi)$ |
 | $\delta(t-t_0)$ | $e^{-j\omega t_0}$ |
 | $1$ | $2\pi\delta(\omega)$ |
 

@@ -72,7 +72,7 @@ $$
 The conjugate pole contributes the conjugate term. Adding them and taking the real part gives
 
 $$
-y_{ss}(t)=A\operatorname{Re}\{H(j\omega)e^{j\omega t}\}.
+y_{ss}(t)=A\,\mathrm{Re}\{H(j\omega)e^{j\omega t}\}.
 $$
 
 Finally, write $H(j\omega)=|H(j\omega)|e^{j\theta}$ to obtain the amplitude-and-phase formula.

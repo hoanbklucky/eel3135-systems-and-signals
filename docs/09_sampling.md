@@ -101,7 +101,7 @@ If the signal is bandlimited and the spectral replicas do not overlap, an ideal 
 
 $$
 x(t)=\sum_{n=-\infty}^{\infty}x(nT_s)
-\operatorname{sinc}\left(\frac{t-nT_s}{T_s}\right).
+\mathrm{sinc}\left(\frac{t-nT_s}{T_s}\right).
 $$
 
 Real systems approximate this operation. Their nonideal filters motivate guard bands and sampling rates above the theoretical minimum.

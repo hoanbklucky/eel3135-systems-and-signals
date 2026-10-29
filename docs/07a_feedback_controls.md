@@ -303,6 +303,8 @@ The essential skills are:
 
 Root locus, Nyquist stability, gain margin, phase margin, and controller synthesis are valuable topics, but they fit more naturally in a dedicated controls course.
 
+If you want an optional bridge to that course, continue with the worked [root-locus and stability-margin extension](optional_control_design/README.md).
+
 ## Common mistakes
 
 - Calling $K$ a feedback-path gain when it appears in the forward path $G(s)$.

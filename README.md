@@ -24,6 +24,10 @@ The notes use the unilateral Laplace transform for causal system analysis. Regio
 | 9 | [Sampling](docs/09_sampling.md) | When can samples represent a continuous-time signal without ambiguity? |
 | 10 | [Cumulative problem-solving guide](docs/10_problem_solving_guide.md) | How do I decide which representation and method to use? |
 
+## Optional extension
+
+- [Root locus and stability margins](docs/optional_control_design/README.md) extends Module 7A into control-design methods. It uses one complete feedback example to connect root locus, the Routh stability boundary, gain margin, phase margin, and closed-loop behavior. This material is optional for EEL 3135 and is intended as preparation for a dedicated controls course.
+
 ## Lecture slides
 
 - [Section 4.7: Applications to Feedback and Controls](<slides/EEL 3135 Section 4.7 Applications to Feedback and Controls.pptx>) connects the feedback block diagram to the closed-loop transfer function, poles, stability, tracking, disturbance rejection, measurement noise, and gain tradeoffs.
