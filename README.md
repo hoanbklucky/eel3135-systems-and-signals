@@ -36,7 +36,7 @@ The notes use the unilateral Laplace transform for causal system analysis. Regio
 
 ## Live learning activities
 
-- [Poll Everywhere: feedback, frequency response, and Bode plots](activities/poll_everywhere_feedback_frequency_bode.md) contains three coherent sets of three multiple-choice questions, with answers, explanations, misconception targets, and recommended locations in the slide decks.
+- [Poll Everywhere: feedback, frequency response, and Bode plots](activities/poll_everywhere_feedback_frequency_bode.md) contains three coherent sets of three multiple-choice questions. The public page intentionally omits the answer key; correct-answer markers are included only in the instructor CSV import files.
 
 ## How to use each module
 
