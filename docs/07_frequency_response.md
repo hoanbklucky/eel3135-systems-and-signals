@@ -424,6 +424,29 @@ The factor $5$ contributes constant gain, and $(1+s/5)$ contributes a zero at th
 
 For repeated factors, add the contribution repeatedly. Two coincident real poles change the slope by $-40$ dB/decade.
 
+## How to decide which factors contribute to the slope
+
+First factor the transfer function into constant gain, poles, and zeros. Its Bode magnitude is a sum:
+
+$$
+20\log_{10}|H(j\omega)|
+=20\log_{10}|K|
++\sum 20\log_{10}|1+j\omega/\omega_z|
+-\sum 20\log_{10}|1+j\omega/\omega_p|.
+$$
+
+The asymptotic contribution from each first-order factor is:
+
+- a constant gain shifts the plot vertically but does not change its slope;
+- a pole at the origin contributes $-20$ dB/decade at every frequency;
+- a zero at the origin contributes $+20$ dB/decade at every frequency;
+- a real pole at corner $\omega_p$ contributes approximately $0$ dB/decade below $\omega_p$ and $-20$ dB/decade above it;
+- a real zero at corner $\omega_z$ contributes approximately $0$ dB/decade below $\omega_z$ and $+20$ dB/decade above it.
+
+Therefore, scan the corner frequencies from left to right. Start with the low-frequency slope. Whenever the scan crosses a pole, subtract $20$ dB/decade. Whenever it crosses a zero, add $20$ dB/decade. Repeated poles or zeros contribute repeatedly.
+
+The phrase “factor contributing to the slope” is asymptotic shorthand. Every factor affects the **exact** magnitude at every nonzero frequency. Near a corner, the exact curve changes smoothly rather than changing slope instantaneously.
+
 ## A reliable hand-sketching procedure
 
 Given a rational transfer function:
@@ -459,9 +482,14 @@ The corner frequencies are:
 - zero at $10$ rad/s;
 - pole at $100$ rad/s.
 
-Now update the slope at each corner.
+Now scan from left to right and update the asymptotic slope at each corner:
 
-| Frequency range | Factors affecting the slope | Net slope |
+1. Begin below $1$ rad/s with slope $0$.
+2. Cross the pole at $1$: $0-20=-20$ dB/decade.
+3. Cross the zero at $10$: $-20+20=0$ dB/decade.
+4. Cross the pole at $100$: $0-20=-20$ dB/decade.
+
+| Frequency range | Factors contributing to the asymptotic slope | Net slope |
 |---|---|---:|
 | $\omega<1$ | none | $0$ dB/decade |
 | $1<\omega<10$ | pole at $1$ | $-20$ dB/decade |
@@ -586,6 +614,77 @@ MATLAB, Python with SciPy, or another frequency-response tool can produce exact 
 4. Investigate any difference before changing the hand sketch.
 
 The comparison matters more than the plotting command.
+
+### MATLAB example
+
+This example requires Control System Toolbox. Enter the transfer function in factored form so the three corner frequencies remain visible:
+
+```matlab
+s = tf('s');
+H = 10*(1 + s/10)/((1 + s)*(1 + s/100));
+
+% Plot from 0.1 to 1000 rad/s.
+w = logspace(-1, 3, 1000);
+bode(H, w)
+grid on
+```
+
+MATLAB evaluates the exact response, not the straight-line approximation. The frequency vector is in radians per second. The complete script is available as [`examples/bode_plot_matlab.m`](../examples/bode_plot_matlab.m).
+
+### Python example using SciPy
+
+SciPy expects numerator and denominator coefficients in descending powers of $s$. First expand the same transfer function:
+
+$$
+H(s)
+=\frac{100(s+10)}{(s+1)(s+100)}
+=\frac{100s+1000}{s^2+101s+100}.
+$$
+
+Then generate exact magnitude and phase data:
+
+```bash
+python -m pip install numpy scipy matplotlib
+```
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy import signal
+
+system = signal.TransferFunction(
+    [100, 1000],       # 100s + 1000
+    [1, 101, 100],     # s^2 + 101s + 100
+)
+
+w = np.logspace(-1, 3, 1000)  # rad/s
+w, magnitude_db, phase_deg = signal.bode(system, w=w)
+
+fig, (ax_mag, ax_phase) = plt.subplots(2, 1, sharex=True)
+ax_mag.semilogx(w, magnitude_db)
+ax_mag.set_ylabel("Magnitude (dB)")
+ax_mag.grid(True, which="both")
+
+ax_phase.semilogx(w, phase_deg)
+ax_phase.set_xlabel("Angular frequency (rad/s)")
+ax_phase.set_ylabel("Phase (deg)")
+ax_phase.grid(True, which="both")
+
+plt.show()
+```
+
+`signal.bode` returns frequency in rad/s, magnitude in dB, and phase in degrees. The complete script, including corner-frequency guide lines, is available as [`examples/bode_plot_python.py`](../examples/bode_plot_python.py).
+
+### What students should compare
+
+Before running either script, predict:
+
+- low-frequency magnitude: $20$ dB;
+- corner frequencies: $1$, $10$, and $100$ rad/s;
+- slopes: $0$, $-20$, $0$, and $-20$ dB/decade in the four successive regions;
+- high-frequency phase: one net pole, so the phase approaches $-90^\circ$.
+
+The exact plot should bend smoothly near each corner while approaching these asymptotic predictions away from the corners.
 
 ## Common mistakes
 
