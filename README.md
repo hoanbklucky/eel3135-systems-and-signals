@@ -18,10 +18,14 @@ The notes use the unilateral Laplace transform for causal system analysis. Regio
 | 4 | [Laplace transform](docs/04_laplace_transform.md) | How does the transform convert differential equations and convolution into algebra? |
 | 5 | [Poles and time-domain responses](docs/05_poles_and_responses.md) | How do pole patterns determine decay, growth, and oscillation? |
 | 6 | [Zero-input, zero-state, and total response](docs/06_response_decomposition.md) | Which part comes from stored energy, and which part comes from the applied input? |
-| 7 | [Frequency response](docs/07_frequency_response.md) | Why does a sinusoid emerge with the same frequency but a different amplitude and phase? |
+| 7 | [Frequency response and Bode plots](docs/07_frequency_response.md) | How do poles and zeros determine which sinusoidal frequencies pass through a system? |
 | 8 | [Fourier series and Fourier transform](docs/08_fourier_analysis.md) | How do we describe signals by their frequency content? |
 | 9 | [Sampling](docs/09_sampling.md) | When can samples represent a continuous-time signal without ambiguity? |
 | 10 | [Cumulative problem-solving guide](docs/10_problem_solving_guide.md) | How do I decide which representation and method to use? |
+
+## Lecture slides
+
+- [Frequency Response and Bode Plots](<slides/EEL 3135 Frequency Response and Bode Plots.pptx>) introduces Bode plots through sinusoidal behavior, first-order building blocks, prediction activities, and one complete pole-zero example.
 
 ## How to use each module
 
@@ -61,7 +65,7 @@ A central goal of the course is learning to move among four complementary views:
 | Differential equation | What physical law relates input and output? |
 | Impulse response and convolution | How does the system combine delayed input values? |
 | Transfer function and poles | What modes and stability properties does the system have? |
-| Frequency response | How does the system alter each sinusoidal frequency? |
+| Frequency response and Bode plots | How does the system alter each sinusoidal frequency, and how can we see that behavior at a glance? |
 
 None of these is “the system” by itself. They are different descriptions of the same LTI behavior under the assumptions stated in each module.
 

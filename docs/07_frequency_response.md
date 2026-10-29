@@ -1,4 +1,17 @@
-# 7. Frequency response
+# 7. Frequency response and Bode plots
+
+## Learning goals
+
+After studying this module, you should be able to:
+
+- use $H(j\omega)$ to predict the amplitude and phase of a sinusoidal steady-state output;
+- read a Bode plot as a description of frequency-selective behavior;
+- locate corner frequencies from the poles and zeros of $H(s)$;
+- sketch the main magnitude asymptotes without calculating many individual points;
+- explain how a pole or zero changes the magnitude slope and phase;
+- connect complex poles with both time-domain ringing and frequency-domain resonance.
+
+The goal is not to produce a perfect hand-drawn curve. The goal is to look at a transfer function or Bode plot and explain what the system does to signals.
 
 ## The result
 
@@ -169,6 +182,306 @@ $$
 20\log_{10}|H(j\omega)|.
 $$
 
+## Why use a Bode plot?
+
+A frequency-response calculation at one value of $\omega$ answers one question:
+
+> What happens to a sinusoid at this particular frequency?
+
+A Bode plot answers the same question for a wide range of frequencies. It contains two graphs:
+
+1. **Magnitude:** $20\log_{10}|H(j\omega)|$ in decibels.
+2. **Phase:** $\angle H(j\omega)$ in degrees.
+
+The horizontal frequency axis is logarithmic. Equal horizontal distances represent equal frequency ratios, such as $1$ to $10$, $10$ to $100$, and $100$ to $1000$ rad/s. Each factor-of-ten interval is one **decade**.
+
+This scale is useful because engineering systems often operate over several orders of magnitude. It also turns multiplication of transfer-function factors into addition of their Bode contributions.
+
+## Decibels without mystery
+
+The magnitude in decibels is
+
+$$
+M_{dB}(\omega)=20\log_{10}|H(j\omega)|.
+$$
+
+Useful reference values are:
+
+| Amplitude ratio $\lvert H\rvert$ | Magnitude |
+|---:|---:|
+| $10$ | $+20$ dB |
+| $2$ | approximately $+6$ dB |
+| $1$ | $0$ dB |
+| $1/\sqrt{2}$ | approximately $-3$ dB |
+| $1/2$ | approximately $-6$ dB |
+| $0.1$ | $-20$ dB |
+
+A negative decibel value does not mean a negative amplitude. It means attenuation. For example, $-6$ dB corresponds to an amplitude ratio of approximately $0.5$.
+
+To convert a decibel value back to an amplitude ratio, use
+
+$$
+|H(j\omega)|=10^{M_{dB}/20}.
+$$
+
+## First-order pole: where the $-20$ dB/decade rule comes from
+
+Consider
+
+$$
+H(s)=\frac{1}{1+s/\omega_p}.
+$$
+
+Its magnitude is
+
+$$
+|H(j\omega)|=\frac{1}{\sqrt{1+(\omega/\omega_p)^2}}.
+$$
+
+Examine three frequency regions.
+
+### Well below the corner frequency
+
+If $\omega\ll\omega_p$, then $\omega/\omega_p$ is small, so
+
+$$
+|H(j\omega)|\approx1.
+$$
+
+The magnitude is approximately $0$ dB.
+
+### At the corner frequency
+
+If $\omega=\omega_p$,
+
+$$
+|H(j\omega_p)|=\frac{1}{\sqrt2},
+$$
+
+which is approximately $-3$ dB. The asymptotic straight lines meet at $0$ dB, but the exact curve lies $3$ dB below them at the corner.
+
+### Well above the corner frequency
+
+If $\omega\gg\omega_p$,
+
+$$
+|H(j\omega)|\approx\frac{\omega_p}{\omega}.
+$$
+
+Increasing $\omega$ by a factor of ten reduces the magnitude by a factor of ten. Therefore one real pole changes the high-frequency slope by
+
+$$
+-20\text{ dB/decade}.
+$$
+
+The corresponding phase is
+
+$$
+\angle H(j\omega)=-\tan^{-1}(\omega/\omega_p).
+$$
+
+It progresses from approximately $0^\circ$ at low frequency to $-90^\circ$ at high frequency and equals $-45^\circ$ at the corner.
+
+## First-order zero
+
+For
+
+$$
+H(s)=1+s/\omega_z,
+$$
+
+the behavior reverses:
+
+- the low-frequency magnitude is approximately $0$ dB;
+- above $\omega_z$, the slope increases by $+20$ dB/decade;
+- the phase progresses from $0^\circ$ toward $+90^\circ$;
+- the phase equals $+45^\circ$ at $\omega=\omega_z$.
+
+Poles bend the magnitude plot downward. Zeros bend it upward.
+
+## Core Bode building blocks
+
+Rewrite each factor in normalized form before sketching. For example,
+
+$$
+s+5=5(1+s/5).
+$$
+
+The factor $5$ contributes constant gain, and $(1+s/5)$ contributes a zero at the corner frequency $5$ rad/s.
+
+| Factor | Magnitude asymptote | Phase behavior |
+|---|---|---|
+| positive gain $K$ | vertical shift of $20\log_{10}K$ dB | $0^\circ$ |
+| $s$ | $+20$ dB/decade from the start | $+90^\circ$ |
+| $1/s$ | $-20$ dB/decade from the start | $-90^\circ$ |
+| $1+s/\omega_z$ | adds $+20$ dB/decade after $\omega_z$ | approaches $+90^\circ$ |
+| $1/(1+s/\omega_p)$ | adds $-20$ dB/decade after $\omega_p$ | approaches $-90^\circ$ |
+
+For repeated factors, add the contribution repeatedly. Two coincident real poles change the slope by $-40$ dB/decade.
+
+## A reliable hand-sketching procedure
+
+Given a rational transfer function:
+
+1. Factor the numerator and denominator.
+2. Rewrite every real pole and zero in normalized form $(1+s/\omega_c)$.
+3. Separate the constant gain and calculate its decibel value.
+4. Mark every corner frequency on a logarithmic axis.
+5. Begin with the low-frequency magnitude and slope.
+6. At each corner, update the slope by $+20$ dB/decade for a zero or $-20$ dB/decade for a pole.
+7. Sketch the exact curve smoothly near each corner.
+8. Add phase contributions or use software for a precise phase curve.
+
+This process predicts the important structure before any detailed numerical plotting.
+
+## Complete worked example
+
+Consider
+
+$$
+H(s)=10\frac{1+s/10}{(1+s)(1+s/100)}.
+$$
+
+The constant gain is $10$, so the low-frequency magnitude begins at
+
+$$
+20\log_{10}(10)=20\text{ dB}.
+$$
+
+The corner frequencies are:
+
+- pole at $1$ rad/s;
+- zero at $10$ rad/s;
+- pole at $100$ rad/s.
+
+Now update the slope at each corner.
+
+| Frequency range | Factors affecting the slope | Net slope |
+|---|---|---:|
+| $\omega<1$ | none | $0$ dB/decade |
+| $1<\omega<10$ | pole at $1$ | $-20$ dB/decade |
+| $10<\omega<100$ | pole at $1$, zero at $10$ | $0$ dB/decade |
+| $\omega>100$ | two poles, one zero | $-20$ dB/decade |
+
+The magnitude asymptote therefore:
+
+- begins at $20$ dB;
+- falls to approximately $0$ dB between $1$ and $10$ rad/s;
+- remains approximately flat between $10$ and $100$ rad/s;
+- falls again above $100$ rad/s.
+
+The exact phase is
+
+$$
+\angle H(j\omega)
+=\tan^{-1}(\omega/10)
+-\tan^{-1}(\omega)
+-\tan^{-1}(\omega/100).
+$$
+
+At $\omega=10$ rad/s,
+
+$$
+|H(j10)|=\frac{10\sqrt2}{\sqrt{101}\sqrt{1.01}}
+\approx1.40,
+$$
+
+and
+
+$$
+\angle H(j10)=45^\circ-84.3^\circ-5.7^\circ=-45^\circ.
+$$
+
+Therefore, for
+
+$$
+x(t)=2\cos(10t),
+$$
+
+the sinusoidal steady-state output is approximately
+
+$$
+y_{ss}(t)=2.80\cos(10t-45^\circ).
+$$
+
+The Bode plot supplies the same result graphically: read the magnitude and phase at $10$ rad/s, then apply them to the input sinusoid.
+
+## Complex poles and resonance
+
+For the standard second-order transfer function
+
+$$
+H(s)=\frac{\omega_n^2}{s^2+2\zeta\omega_n s+\omega_n^2},
+$$
+
+the pole pair controls both time-domain and frequency-domain behavior.
+
+- In the time domain, lightly damped poles produce slowly decaying oscillations.
+- In the frequency domain, the same poles may produce a peak near $\omega_n$.
+- Moving the poles closer to the imaginary axis reduces damping and makes the peak more pronounced.
+
+This is an important connection:
+
+$$
+\boxed{\text{Pole location predicts time-domain modes and frequency-domain shape.}}
+$$
+
+Do not assume that every complex pole pair creates a large resonance peak. The damping ratio, numerator, and nearby zeros also affect the magnitude.
+
+## Exact curves versus asymptotes
+
+A hand-drawn Bode magnitude plot usually shows straight-line asymptotes. Software shows the exact curve.
+
+Use the hand sketch to predict:
+
+- corner locations;
+- low- and high-frequency behavior;
+- slope changes;
+- approximate gain in each region.
+
+Use software to verify the smooth transitions, exact phase, and any resonance peak. Software should confirm a prediction rather than replace it.
+
+## Reading a Bode plot to predict an output
+
+Suppose a Bode plot gives
+
+$$
+|H(j10)|_{dB}=-6\text{ dB},
+\qquad
+\angle H(j10)=-45^\circ.
+$$
+
+Convert the magnitude:
+
+$$
+|H(j10)|=10^{-6/20}\approx0.50.
+$$
+
+For
+
+$$
+x(t)=4\cos(10t+20^\circ),
+$$
+
+the output amplitude is $4(0.50)=2$, and the phases add:
+
+$$
+y_{ss}(t)\approx2\cos(10t-25^\circ).
+$$
+
+The output keeps the same frequency. The Bode magnitude changes its amplitude, and the Bode phase changes its phase.
+
+## Suggested software workflow
+
+MATLAB, Python with SciPy, or another frequency-response tool can produce exact Bode plots. Use the following workflow:
+
+1. Predict the low-frequency gain, corner frequencies, and slopes by hand.
+2. Generate the exact magnitude and phase plots.
+3. Compare each predicted corner and slope with the exact result.
+4. Investigate any difference before changing the hand sketch.
+
+The comparison matters more than the plotting command.
+
 ## Common mistakes
 
 - Substituting $s=j\omega$ into $X(s)$ instead of the system transfer function $H(s)$.
@@ -176,18 +489,30 @@ $$
 - Reporting $\omega$ in hertz. Angular frequency uses rad/s; $\omega=2\pi f$.
 - Using the steady-state formula for an unstable system without considering the growing natural response.
 - Assuming the formula gives the complete response. It omits transient and zero-input terms.
+- Treating the logarithmic frequency axis as a linear axis.
+- Calling $-6$ dB a negative amplitude instead of attenuation by approximately one half.
+- Forgetting to normalize factors such as $s+5=5(1+s/5)$ before identifying gain and corner frequency.
+- Changing the slope before the corner frequency instead of after it.
+- Adding magnitude ratios directly. Transfer-function factors multiply, while their decibel values add.
+- Reading a Bode magnitude without also checking phase when predicting a sinusoidal output.
 
 ## Additional practice
 
 1. If $|H(j10)|=0.2$ and $\angle H(j10)=45^\circ$, find the steady-state output for $x(t)=4\cos(10t-20^\circ)$.
 2. A stable system has $H(j5)=0$. What steady-state output results from $\cos(5t)$?
 3. For $H(s)=1/(s+1)$, does the phase lag increase or decrease as frequency increases?
+4. A transfer function has one real zero at $2$ rad/s and two real poles at $20$ rad/s. What is the magnitude slope above $20$ rad/s?
+5. Sketch the asymptotic magnitude plot for $H(s)=100/[(1+s)(1+s/10)]$. State the initial magnitude, corner frequencies, and slope in each region.
+6. A Bode plot shows $|H(j5)|=+6$ dB and $\angle H(j5)=-30^\circ$. Predict the steady-state output for $x(t)=3\cos(5t+10^\circ)$.
 
 <details><summary>Answers</summary>
 
 1. $0.8\cos(10t+25^\circ)$.
 2. Zero.
 3. The lag increases in magnitude: $\angle H(j\omega)=-\tan^{-1}(\omega)$ approaches $-90^\circ$.
+4. The zero contributes $+20$ dB/decade and the two poles contribute $-40$ dB/decade, giving a net slope of $-20$ dB/decade.
+5. The initial magnitude is $40$ dB. The slope is $0$ below $1$ rad/s, $-20$ dB/decade from $1$ to $10$ rad/s, and $-40$ dB/decade above $10$ rad/s.
+6. Since $+6$ dB is approximately a factor of two, $y_{ss}(t)\approx6\cos(5t-20^\circ)$.
 
 </details>
 
