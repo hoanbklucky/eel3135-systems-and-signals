@@ -125,15 +125,15 @@ $$
 \begin{aligned}
 y_{ss}(t)
 &=Be^{j\omega t}+B^*e^{-j\omega t}\\
-&=2\,\mathrm{Re}\left\{Be^{j\omega t}\right\}\\
-&=A\,\mathrm{Re}\left\{H(j\omega)e^{j\omega t}\right\}.
+&=2\,\mathrm{Re}\big[Be^{j\omega t}\big]\\
+&=A\,\mathrm{Re}\big[H(j\omega)e^{j\omega t}\big].
 \end{aligned}
 $$
 
 Finally, write
 
 $$
-H(j\omega)=|H(j\omega)|e^{j\theta},
+H(j\omega)=\lvert H(j\omega)\rvert e^{j\theta},
 \qquad \theta=\angle H(j\omega).
 $$
 
@@ -141,7 +141,7 @@ Then
 
 $$
 \boxed{
-y_{ss}(t)=A|H(j\omega)|\cos\left(\omega t+\theta\right)
+y_{ss}(t)=A\lvert H(j\omega)\rvert\cos\left(\omega t+\theta\right)
 }
 $$
 
