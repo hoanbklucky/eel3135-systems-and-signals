@@ -379,15 +379,90 @@ $$
 |H(j\omega)|=10^{M_{dB}/20}.
 $$
 
-## First-order pole: where the $-20$ dB/decade rule comes from
+## Why we need corner frequencies
 
-Consider
+A frequency response is a curve defined at infinitely many frequencies. Listing its value at every frequency is impossible, and calculating many isolated points does not immediately reveal its structure.
+
+A **corner frequency** gives us a useful landmark. It divides the frequency axis into regions in which a pole or zero has different approximate behavior:
+
+- well below the corner, a first-order factor is approximately constant;
+- near the corner, the response changes smoothly from one behavior to another;
+- well above the corner, the factor behaves approximately like a power of frequency.
+
+Once the corner frequencies are marked, we can predict where a Bode magnitude plot begins to bend and where its asymptotic slope changes. Instead of calculating hundreds of points, we describe the response by a small number of meaningful frequencies.
+
+## A concrete definition for a first-order factor
+
+Consider the normalized first-order pole factor
 
 $$
 H(s)=\frac{1}{1+s/\omega_p}.
 $$
 
-Here $\omega_p$ is the pole's corner frequency, measured in radians per second. Rewriting the factor as
+To obtain its frequency response, set $s=j\omega$:
+
+$$
+H(j\omega)=\frac{1}{1+j\omega/\omega_p}.
+$$
+
+The denominator contains two terms:
+
+$$
+1 \qquad \text{and} \qquad j\omega/\omega_p.
+$$
+
+At low frequency, the constant term $1$ dominates. At high frequency, the frequency-dependent term $j\omega/\omega_p$ dominates. The transition occurs around the frequency at which their magnitudes are equal:
+
+$$
+\lvert j\omega/\omega_p\rvert=1.
+$$
+
+Because $\lvert j\rvert=1$, this condition gives
+
+$$
+\boxed{\omega=\omega_p.}
+$$
+
+For this first-order factor, **the corner frequency is the positive angular frequency at which the constant and frequency-dependent terms have equal magnitude**. It is measured in radians per second.
+
+The name *corner* comes from the straight-line Bode approximation: the low-frequency horizontal asymptote and the high-frequency sloping asymptote meet at this frequency, forming a corner. The exact response does not have a sharp corner; it bends smoothly.
+
+### What happens at the corner?
+
+At $\omega=\omega_p$,
+
+$$
+H(j\omega_p)=\frac{1}{1+j}.
+$$
+
+Therefore,
+
+$$
+\lvert H(j\omega_p)\rvert=\frac{1}{\sqrt{2}}\approx0.707,
+$$
+
+and
+
+$$
+\angle H(j\omega_p)=-45^\circ.
+$$
+
+Thus an isolated first-order pole factor has the following properties at its corner:
+
+| Interpretation | Value at $\omega=\omega_p$ |
+|---|---:|
+| ratio of the two denominator terms | $1$ |
+| exact magnitude | $1/\sqrt{2}$ |
+| magnitude relative to its low-frequency level | approximately $-3$ dB |
+| phase | $-45^\circ$ |
+
+These are different descriptions of the same transition frequency.
+
+> **Important:** A pole factor contributes approximately $-3$ dB at its own corner. The magnitude of an entire transfer function is not necessarily $-3$ dB there because gain, other poles, and zeros also contribute. Therefore, *corner frequency* and the overall system's *cutoff frequency* should not automatically be treated as synonyms.
+
+## How the corner frequency relates to the pole location
+
+Rewriting the factor as
 
 $$
 H(s)=\frac{\omega_p}{s+\omega_p}
@@ -399,13 +474,42 @@ $$
 s=-\omega_p.
 $$
 
-Thus the same positive number $\omega_p$ identifies both the Bode corner frequency and the magnitude of the real pole location. For example,
+Thus the same positive number $\omega_p$ identifies both:
+
+- the pole location $s=-\omega_p$ in the $s$-plane; and
+- the corner frequency $\omega=\omega_p$ on the positive frequency axis.
+
+The signs differ because a stable real pole lies on the negative real axis, while frequency is reported as a positive number.
+
+For example,
 
 $$
 H(s)=\frac{10}{s+10}=\frac{1}{1+s/10}
 $$
 
 has a pole at $s=-10$ and a corner frequency $\omega_p=10$ rad/s.
+
+Angular frequency and ordinary frequency are related by $\omega=2\pi f$, so this corner is
+
+$$
+f_p=\frac{10}{2\pi}\approx1.59\text{ Hz}.
+$$
+
+This system also has time constant
+
+$$
+\tau=\frac{1}{\omega_p}=0.1\text{ s}.
+$$
+
+The same parameter therefore connects three views of the system:
+
+| View | Meaning of $\omega_p=10$ |
+|---|---|
+| pole map | pole at $s=-10$ |
+| time response | time constant $\tau=0.1$ s |
+| frequency response | corner at $10$ rad/s |
+
+## First-order pole: where the $-20$ dB/decade rule comes from
 
 Its magnitude is
 
