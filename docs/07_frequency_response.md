@@ -31,51 +31,121 @@ The system changes amplitude and phase, but the steady-state sinusoid keeps the 
 
 ## Where this expression comes from
 
-We can derive it using partial fractions without introducing the term *residue*.
+The following derivation answers a specific question: **which part of the output is caused by the sinusoidal input and remains after the system transients decay?**
 
-Write the cosine as two complex exponentials:
-
-$$
-A\cos(\omega t)=\frac{A}{2}e^{j\omega t}+\frac{A}{2}e^{-j\omega t}.
-$$
-
-The corresponding transform contains the input poles $s=\pm j\omega$:
+To use the unilateral Laplace transform, let the sinusoid be switched on at $t=0$:
 
 $$
-X(s)=\frac{A}{2}\left[\frac{1}{s-j\omega}+\frac{1}{s+j\omega}\right].
+x(t)=A\cos(\omega t)u(t).
 $$
 
-Because $Y(s)=H(s)X(s)$, its partial-fraction expansion contains a term
+Using Euler's formula,
 
 $$
-\frac{B}{s-j\omega}.
+A\cos(\omega t)u(t)
+=\frac{A}{2}\left(e^{j\omega t}+e^{-j\omega t}\right)u(t).
 $$
 
-Find $B$ with the same cover-up method used for every distinct pole:
+Therefore,
+
+$$
+X(s)=\frac{A}{2}\left[\frac{1}{s-j\omega}+\frac{1}{s+j\omega}\right]
+=\frac{As}{s^2+\omega^2}.
+$$
+
+This form shows two **input poles**, at $s=j\omega$ and $s=-j\omega$. Their inverse transforms generate sinusoids at frequency $\omega$.
+
+For zero initial conditions,
+
+$$
+Y(s)=H(s)X(s).
+$$
+
+The poles of $Y(s)$ generally include both:
+
+- the poles of $H(s)$, which generate the system's transient terms; and
+- the poles $s=\pm j\omega$ from $X(s)$, which generate the sustained sinusoidal terms.
+
+Assume that $H(s)$ has no pole at $s=\pm j\omega$. In a partial-fraction expansion, write only the two input-pole terms explicitly:
+
+$$
+Y(s)=Y_{tr}(s)+\frac{B}{s-j\omega}+\frac{C}{s+j\omega}.
+$$
+
+Here $Y_{tr}(s)$ contains the terms associated with the poles of $H(s)$. The constants $B$ and $C$ are simply the partial-fraction coefficients of the two sinusoidal terms.
+
+### Finding the coefficient at $s=j\omega$
+
+Use the cover-up method:
 
 $$
 B=\left.(s-j\omega)Y(s)\right|_{s=j\omega}.
 $$
 
-Substituting $Y(s)=H(s)X(s)$ gives
+Substitute $Y(s)=H(s)X(s)$ and the expression for $X(s)$:
 
 $$
-B=\frac{A}{2}H(j\omega).
+\begin{aligned}
+B
+&=\left.(s-j\omega)H(s)\frac{A}{2}
+\left[\frac{1}{s-j\omega}+\frac{1}{s+j\omega}\right]
+\right|_{s=j\omega}\\
+&=\left.\frac{A}{2}H(s)
+\left[1+\frac{s-j\omega}{s+j\omega}\right]
+\right|_{s=j\omega}\\
+&=\frac{A}{2}H(j\omega).
+\end{aligned}
 $$
 
-Therefore the $s=j\omega$ input pole contributes
+The second term inside the brackets becomes zero when $s=j\omega$. This is why the coefficient is $A H(j\omega)/2$.
+
+The corresponding time-domain term is
 
 $$
-\frac{A}{2}H(j\omega)e^{j\omega t}.
+Be^{j\omega t}=\frac{A}{2}H(j\omega)e^{j\omega t}.
 $$
 
-The conjugate pole contributes the conjugate term. Adding them and taking the real part gives
+### Combining the conjugate pair into a real sinusoid
+
+For a physical LTI system with real coefficients,
 
 $$
-y_{ss}(t)=A\,\mathrm{Re}\{H(j\omega)e^{j\omega t}\}.
+H(-j\omega)=H^*(j\omega),
 $$
 
-Finally, write $H(j\omega)=|H(j\omega)|e^{j\theta}$ to obtain the amplitude-and-phase formula.
+so the coefficient at the other input pole is
+
+$$
+C=\frac{A}{2}H(-j\omega)=B^*.
+$$
+
+The two input-pole terms therefore combine as
+
+$$
+\begin{aligned}
+y_{ss}(t)
+&=Be^{j\omega t}+B^*e^{-j\omega t}\\
+&=2\,\mathrm{Re}\left\{Be^{j\omega t}\right\}\\
+&=A\,\mathrm{Re}\left\{H(j\omega)e^{j\omega t}\right\}.
+\end{aligned}
+$$
+
+Finally, write
+
+$$
+H(j\omega)=|H(j\omega)|e^{j\theta},
+\qquad \theta=\angle H(j\omega).
+$$
+
+Then
+
+$$
+\boxed{
+y_{ss}(t)=A|H(j\omega)|\cos\left(\omega t+\theta\right)
+}
+$$
+
+The message is simple: the input determines the frequency $\omega$, while the system value $H(j\omega)$ determines the output amplitude and phase.
 
 ## Why it is called steady state
 
