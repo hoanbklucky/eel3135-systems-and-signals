@@ -210,7 +210,8 @@ where
 
 $$
 H(s)=\mathcal L\{h(t)\}
-=\left.\frac{Y(s)}{X(s)}\right|_{\text{zero initial conditions}}.
+=\frac{Y(s)}{X(s)}
+\quad\text{with zero initial conditions}.
 $$
 
 The zero-initial-condition qualification matters. If a system starts with stored energy, then $H(s)X(s)$ gives only the zero-state response. The total response also contains a zero-input contribution:
@@ -319,9 +320,9 @@ $$
 Using cover-up,
 
 $$
-A=\left.\frac{2s+7}{s+3}\right|_{s=-1}=\frac52,
+A=\frac{2(-1)+7}{-1+3}=\frac52,
 \qquad
-B=\left.\frac{2s+7}{s+1}\right|_{s=-3}=-\frac12.
+B=\frac{2(-3)+7}{-3+1}=-\frac12.
 $$
 
 Therefore

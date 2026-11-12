@@ -73,6 +73,66 @@ The common time dependence at frequency $\omega$ is omitted while performing the
 
 These notes use **peak-amplitude phasors**. Some circuit courses use RMS magnitudes instead. Either convention works if it is used consistently.
 
+## Why differentiation becomes multiplication by $j\omega$
+
+This rule is not an extra formula to memorize. It follows directly from the complex-exponential representation of a sinusoid.
+
+Write a real sinusoid as the real part of a complex exponential:
+
+$$
+x(t)=\Re\{Xe^{j\omega t}\},
+$$
+
+where the constant complex number $X=Ae^{j\phi}$ stores the amplitude and phase. Differentiate the complex expression before taking its real part:
+
+$$
+\frac{d}{dt}\left(Xe^{j\omega t}\right)
+=X\frac{d}{dt}e^{j\omega t}
+=j\omega Xe^{j\omega t}.
+$$
+
+The factor $X$ is constant for a fixed sinusoid, and
+
+$$
+\frac{d}{dt}e^{j\omega t}=j\omega e^{j\omega t}.
+$$
+
+Therefore the time-domain operation and its phasor-domain operation correspond as follows:
+
+$$
+x(t)\longleftrightarrow X,
+$$
+
+$$
+\frac{dx(t)}{dt}\longleftrightarrow j\omega X.
+$$
+
+Multiplying by $j\omega$ has two visible effects:
+
+- multiplication by $\omega$ multiplies the amplitude by $\omega$;
+- multiplication by $j=e^{j90^\circ}$ advances the phase by $90^\circ$.
+
+For example,
+
+$$
+x(t)=3\cos(4t+20^\circ)
+$$
+
+has phasor $X=3\angle20^\circ$. Its derivative has phasor
+
+$$
+j\omega X=(4\angle90^\circ)(3\angle20^\circ)
+=12\angle110^\circ.
+$$
+
+Thus
+
+$$
+\frac{dx(t)}{dt}=12\cos(4t+110^\circ),
+$$
+
+which is the same result obtained by ordinary differentiation. This one rule is what turns element differential equations into algebraic impedance relations.
+
 ### Example: cosine reference
 
 $$
@@ -141,11 +201,13 @@ $$
 \boxed{A_n=\sqrt{a_n^2+b_n^2}}.
 $$
 
-Using the two-argument arctangent to select the correct quadrant,
+Using the complex angle to select the correct quadrant,
 
 $$
-\boxed{\phi_n=\mathrm{atan2}(-b_n,a_n)}.
+\boxed{\phi_n=\arg(a_n-jb_n)}.
 $$
+
+On a calculator or in software, this is `atan2(-b_n,a_n)`.
 
 The harmonic phasor is then
 
@@ -170,7 +232,7 @@ $$
 and
 
 $$
-\phi_n=\mathrm{atan2}(-4,3)=-53.1^\circ.
+\phi_n=\arg(3-j4)=-53.1^\circ.
 $$
 
 Thus,
@@ -194,6 +256,14 @@ $$
 $$
 
 It plays the role that resistance plays in a DC circuit, but it can change both magnitude and phase.
+
+Equivalently, each element obeys a phasor-domain version of Ohm's law:
+
+$$
+\boxed{V=ZI}.
+$$
+
+The three impedance formulas below come from rewriting each element's voltage-current law in this form.
 
 ## Resistor impedance
 
@@ -225,7 +295,7 @@ $$
 v_L(t)=L\frac{di_L(t)}{dt}.
 $$
 
-For a sinusoid at angular frequency $\omega$, differentiation becomes multiplication by $j\omega$. Thus,
+For a sinusoid at angular frequency $\omega$, differentiation becomes multiplication by $j\omega$. Therefore,
 
 $$
 V_L=j\omega L I_L,
@@ -261,6 +331,12 @@ For a sinusoid at angular frequency $\omega$,
 
 $$
 I_C=j\omega C V_C.
+$$
+
+Solve this equation for $V_C$ so it has the form $V_C=Z_CI_C$:
+
+$$
+V_C=\frac{1}{j\omega C}I_C.
 $$
 
 Therefore,
@@ -431,6 +507,38 @@ $$
 $$
 
 At DC, $H_C(0)=1$, so the average value passes. As $n$ increases, the output magnitude decreases. The higher harmonics that create sharp edges are attenuated, so a square-wave output becomes smoother and more sinusoidal.
+
+### Numerical calculation at one frequency
+
+Let $R=10\ \Omega$, $C=0.01\ \mathrm{F}$, and $\omega=10$ rad/s. The capacitor impedance is
+
+$$
+Z_C=\frac{1}{j(10)(0.01)}=-j10\ \Omega.
+$$
+
+If the source phasor is $V_s=10\angle0^\circ$ V, the series current is
+
+$$
+I=\frac{V_s}{R+Z_C}
+=\frac{10\angle0^\circ}{10-j10}
+=0.707\angle45^\circ\ \mathrm{A}.
+$$
+
+The capacitor-voltage phasor is
+
+$$
+V_C=Z_CI
+=(10\angle-90^\circ)(0.707\angle45^\circ)
+=7.07\angle-45^\circ\ \mathrm{V}.
+$$
+
+Hence the steady-state capacitor voltage is
+
+$$
+v_C(t)=7.07\cos(10t-45^\circ)\ \mathrm{V}.
+$$
+
+The same result follows from $V_C=H_C(j10)V_s$. The impedance calculation reveals where the magnitude reduction and phase lag come from.
 
 ## Common mistakes
 

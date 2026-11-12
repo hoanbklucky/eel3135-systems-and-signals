@@ -242,7 +242,8 @@ Both contributions contain the system modes $-1\pm j2$. The initial conditions a
 The transfer function is defined with zero initial conditions:
 
 $$
-H(s)=\left.\frac{Y(s)}{X(s)}\right|_{\text{zero initial conditions}}.
+H(s)=\frac{Y(s)}{X(s)}
+\quad\text{with zero initial conditions}.
 $$
 
 Therefore

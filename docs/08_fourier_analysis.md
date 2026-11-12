@@ -1,10 +1,177 @@
 # 8. Fourier series and Fourier transform
 
-## Fourier series
+## Why Fourier series is useful
 
-Before applying Fourier series to electrical circuits, read [Phasors and impedance for Fourier-series circuits](08a_phasors_and_impedance.md). It explains why the $n$th harmonic has frequency $n\omega_0$, how to determine its phasor, and why resistor, inductor, and capacitor impedances must be evaluated separately at every harmonic.
+A periodic waveform can be complicated in time but simple in frequency: it is a sum of a DC value and sinusoidal harmonics. Fourier series lets us replace one difficult periodic-input problem with many easy sinusoidal-input problems.
 
-A periodic signal can be represented as a sum of harmonically related complex exponentials:
+For an LTI system, the workflow is:
+
+1. calculate the Fourier coefficients of the periodic input;
+2. let the system scale and phase-shift each harmonic;
+3. add the output harmonics to reconstruct the output.
+
+This is useful for filtering, audio, communications, power electronics, vibration, and circuits driven by pulse or square waves.
+
+Before applying Fourier series to electrical circuits, read [Phasors and impedance for Fourier-series circuits](08a_phasors_and_impedance.md). It derives the phasor and impedance rules used for each harmonic.
+
+## Fundamental frequency and harmonics
+
+If a signal has fundamental period $T_0$, its fundamental angular frequency is
+
+$$
+\omega_0=\frac{2\pi}{T_0}.
+$$
+
+The allowed Fourier-series frequencies are integer multiples of $\omega_0$:
+
+$$
+0,\ \omega_0,\ 2\omega_0,\ 3\omega_0,\ldots
+$$
+
+The component at $n\omega_0$ is called the $n$th harmonic. Fourier series does not create arbitrary frequencies between these harmonics.
+
+## Trigonometric Fourier series
+
+One common convention is
+
+$$
+x(t)=\frac{a_0}{2}
++\sum_{n=1}^{\infty}
+\left[a_n\cos(n\omega_0t)+b_n\sin(n\omega_0t)\right].
+$$
+
+The coefficients are calculated over any complete period:
+
+$$
+a_0=\frac{2}{T_0}\int_{t_0}^{t_0+T_0}x(t)\,dt,
+$$
+
+$$
+a_n=\frac{2}{T_0}\int_{t_0}^{t_0+T_0}x(t)\cos(n\omega_0t)\,dt,
+$$
+
+$$
+b_n=\frac{2}{T_0}\int_{t_0}^{t_0+T_0}x(t)\sin(n\omega_0t)\,dt.
+$$
+
+Interpretation:
+
+- $a_0/2$ is the average or DC value;
+- $a_n$ is the weight of the cosine at $n\omega_0$;
+- $b_n$ is the weight of the sine at $n\omega_0$.
+
+These formulas work because different harmonics are orthogonal over one complete period. Multiplying by one basis sinusoid and integrating cancels the other harmonics.
+
+## Symmetry shortcuts before integrating
+
+Choose a period symmetric about the origin, such as $[-T_0/2,T_0/2]$, and inspect the signal first.
+
+### Even signal
+
+If $x(-t)=x(t)$, the signal is even. An even signal has no sine terms:
+
+$$
+b_n=0.
+$$
+
+The remaining integrals can be doubled over half a period:
+
+$$
+a_0=\frac{4}{T_0}\int_0^{T_0/2}x(t)\,dt,
+$$
+
+$$
+a_n=\frac{4}{T_0}\int_0^{T_0/2}x(t)\cos(n\omega_0t)\,dt.
+$$
+
+### Odd signal
+
+If $x(-t)=-x(t)$, the signal is odd. An odd signal has no DC or cosine terms:
+
+$$
+a_0=0,
+$$
+
+$$
+a_n=0.
+$$
+
+Only the sine coefficients remain:
+
+$$
+b_n=\frac{4}{T_0}\int_0^{T_0/2}x(t)\sin(n\omega_0t)\,dt.
+$$
+
+Symmetry does more than save algebra: it predicts which coefficients must be zero before any calculation.
+
+## Quick odd-signal example
+
+Let $x(t)=t$ for $-\pi<t<\pi$, repeated with period $2\pi$. The signal is odd, so $a_0=a_n=0$ and $\omega_0=1$ rad/s. Then
+
+$$
+b_n=\frac{2}{\pi}\int_0^\pi t\sin(nt)\,dt.
+$$
+
+Integration by parts gives
+
+$$
+b_n=\frac{2(-1)^{n+1}}{n}.
+$$
+
+Therefore,
+
+$$
+x(t)=2\sin t-\sin(2t)+\frac{2}{3}\sin(3t)-\cdots
+$$
+
+The symmetry prediction and the calculated coefficients agree: only sine terms appear.
+
+## Compact amplitude-phase form
+
+The pair
+
+$$
+a_n\cos(n\omega_0t)+b_n\sin(n\omega_0t)
+$$
+
+can be written as one cosine:
+
+$$
+C_n\cos(n\omega_0t+\phi_n).
+$$
+
+Expanding the compact form and matching coefficients gives
+
+$$
+C_n=\sqrt{a_n^2+b_n^2},
+$$
+
+$$
+\phi_n=\arg(a_n-jb_n).
+$$
+
+On a calculator or in software, evaluate this angle with `atan2(-b_n,a_n)` so the correct quadrant is retained.
+
+For example, if $a_1=3$ and $b_1=4$, then
+
+$$
+C_1=5,
+$$
+
+$$
+\phi_1=-53.1^\circ,
+$$
+
+so
+
+$$
+3\cos(\omega_0t)+4\sin(\omega_0t)
+=5\cos(\omega_0t-53.1^\circ).
+$$
+
+## Exponential Fourier series
+
+The same periodic signal can be written as
 
 $$
 x(t)=\sum_{k=-\infty}^{\infty}D_k e^{jk\omega_0t},
@@ -16,7 +183,21 @@ $$
 D_k=\frac{1}{T_0}\int_{t_0}^{t_0+T_0}x(t)e^{-jk\omega_0t}\,dt.
 $$
 
-The coefficient $D_k$ tells how much of the frequency $k\omega_0$ appears in the signal.
+For the trigonometric convention used above,
+
+$$
+D_0=\frac{a_0}{2},
+$$
+
+$$
+D_n=\frac{a_n-jb_n}{2},
+$$
+
+$$
+D_{-n}=\frac{a_n+jb_n}{2}.
+$$
+
+For a real signal, $D_{-n}=D_n^*$. The positive- and negative-frequency terms form one real sinusoid; they are not two separate physical oscillations.
 
 ## Fourier transform
 

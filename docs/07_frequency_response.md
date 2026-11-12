@@ -79,22 +79,23 @@ Here $Y_{tr}(s)$ contains the terms associated with the poles of $H(s)$. The con
 Use the cover-up method:
 
 $$
-B=\left.(s-j\omega)Y(s)\right|_{s=j\omega}.
+B=\big[(s-j\omega)Y(s)\big]_{s=j\omega}.
 $$
 
 Substitute $Y(s)=H(s)X(s)$ and the expression for $X(s)$:
 
+First cancel the factor associated with the pole:
+
 $$
-\begin{aligned}
-B
-&=\left.(s-j\omega)H(s)\frac{A}{2}
-\left[\frac{1}{s-j\omega}+\frac{1}{s+j\omega}\right]
-\right|_{s=j\omega}\\
-&=\left.\frac{A}{2}H(s)
+B=\frac{A}{2}H(s)
 \left[1+\frac{s-j\omega}{s+j\omega}\right]
-\right|_{s=j\omega}\\
-&=\frac{A}{2}H(j\omega).
-\end{aligned}
+\quad\text{evaluated at }s=j\omega.
+$$
+
+At $s=j\omega$, the fraction in brackets is zero. Therefore,
+
+$$
+B=\frac{A}{2}H(j\omega).
 $$
 
 The second term inside the brackets becomes zero when $s=j\omega$. This is why the coefficient is $A H(j\omega)/2$.
@@ -121,13 +122,20 @@ $$
 
 The two input-pole terms therefore combine as
 
+The two terms are complex conjugates, so their sum is twice the real part of either one:
+
 $$
-\begin{aligned}
-y_{ss}(t)
-&=Be^{j\omega t}+B^*e^{-j\omega t}\\
-&=2\,\mathrm{Re}\big[Be^{j\omega t}\big]\\
-&=A\,\mathrm{Re}\big[H(j\omega)e^{j\omega t}\big].
-\end{aligned}
+y_{ss}(t)=Be^{j\omega t}+B^*e^{-j\omega t}.
+$$
+
+$$
+y_{ss}(t)=2\Re\{Be^{j\omega t}\}.
+$$
+
+Since $B=AH(j\omega)/2$,
+
+$$
+y_{ss}(t)=A\Re\{H(j\omega)e^{j\omega t}\}.
 $$
 
 Finally, write
@@ -624,13 +632,9 @@ $$
 
 Consequently, after its corner frequency:
 
-$$
-\boxed{
-\begin{aligned}
-\text{one first-order pole}&:\ -20\text{ dB/decade},\\
-\text{one first-order zero}&:\ +20\text{ dB/decade}.
-\end{aligned}}
-$$
+One first-order pole changes the asymptotic slope by $-20$ dB/decade.
+
+One first-order zero changes the asymptotic slope by $+20$ dB/decade.
 
 These are **asymptotic** contributions. The exact curve changes smoothly near the corner. Contributions add because multiplication of transfer-function factors becomes addition after taking the logarithm. A repeated factor contributes repeatedly: a double pole gives $-40$ dB/decade, while a double zero gives $+40$ dB/decade.
 
