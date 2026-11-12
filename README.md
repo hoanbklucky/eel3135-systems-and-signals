@@ -21,6 +21,7 @@ The notes use the unilateral Laplace transform for causal system analysis. Regio
 | 7A | [Feedback and control applications](docs/07a_feedback_controls.md) | How does closing a feedback loop change poles, stability, tracking, and disturbance response? |
 | 7B | [Frequency response and Bode plots](docs/07_frequency_response.md) | How do poles and zeros determine which sinusoidal frequencies pass through a system? |
 | 8 | [Fourier series and Fourier transform](docs/08_fourier_analysis.md) | How do we describe signals by their frequency content? |
+| 8A | [Phasors and impedance for Fourier-series circuits](docs/08a_phasors_and_impedance.md) | How does a circuit modify each Fourier harmonic? |
 | 9 | [Sampling](docs/09_sampling.md) | When can samples represent a continuous-time signal without ambiguity? |
 | 10 | [Cumulative problem-solving guide](docs/10_problem_solving_guide.md) | How do I decide which representation and method to use? |
 

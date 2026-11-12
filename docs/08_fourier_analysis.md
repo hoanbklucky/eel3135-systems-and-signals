@@ -2,6 +2,8 @@
 
 ## Fourier series
 
+Before applying Fourier series to electrical circuits, read [Phasors and impedance for Fourier-series circuits](08a_phasors_and_impedance.md). It explains why the $n$th harmonic has frequency $n\omega_0$, how to determine its phasor, and why resistor, inductor, and capacitor impedances must be evaluated separately at every harmonic.
+
 A periodic signal can be represented as a sum of harmonically related complex exponentials:
 
 $$
